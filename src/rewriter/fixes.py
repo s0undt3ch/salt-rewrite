@@ -1,9 +1,7 @@
 """
-    rewriter.fixes
-    ~~~~~~~~~~~~~~
-
-    Entry point for all the code rewrite fixes
+Entry point for all the code rewrite fixes.
 """
+
 import operator
 from collections import OrderedDict
 
@@ -13,7 +11,7 @@ import rewriter.testsuite
 
 class RegistryClass:
     """
-    Registry class to hold all available fixes
+    Registry class to hold all available fixes.
     """
 
     __slots__ = ("__fixes__",)
@@ -28,7 +26,7 @@ class RegistryClass:
 
     def fixes(self, excluded_names=(), only_names=()):
         """
-        Returns all available fixes, optionally skipping those passed in `excluded_names`
+        Returns all available fixes, optionally skipping those passed in `excluded_names`.
         """
         for name in self.__fixes__:
             if only_names:
@@ -41,9 +39,9 @@ class RegistryClass:
 
     def fix_names(self):
         """
-        Returns the list of the fix names
+        Returns the list of the fix names.
         """
         return list(self.__fixes__)
 
 
-Registry = RegistryClass()  # pylint: disable=invalid-name
+Registry = RegistryClass()

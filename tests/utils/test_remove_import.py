@@ -6,6 +6,7 @@ import pytest
 from fissix import pygram
 from fissix import pytree
 from fissix.pgen2.driver import Driver
+
 from rewriter.utils import remove_from_import
 from rewriter.utils import remove_import
 

@@ -1,12 +1,11 @@
 """
-    rewriter.testsuite.fix_expensive_test_decorator
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Replaces any use of ``@expensiveTest`` with ``@pytest.mark.expensive_test``.
 
-    Replaces any use of ``@expensiveTest`` with ``@pytest.mark.expensive_test``,
-    and, in case ``pytest`` isn't yet imported, it additionall adds the missing
-    import
+In case ``pytest`` isn't yet imported, it additionally adds the missing import.
 """
+
 from bowler import Query
+
 from rewriter import utils
 
 MARKER = "pytest.mark.expensive_test"
@@ -15,7 +14,7 @@ DECORATOR = "expensiveTest"
 
 def rewrite(paths, interactive=False, silent=False):
     """
-    Rewrite the passed in paths
+    Rewrite the passed in paths.
     """
     # Don't waste time on non-test files
     paths = utils.filter_test_files(paths)
@@ -32,13 +31,13 @@ def rewrite(paths, interactive=False, silent=False):
 
 def filter_not_decorated(node, capture, filename):
     """
-    Filter undecorated nodes
+    Filter undecorated nodes.
     """
     return bool(utils.get_decorator(node, DECORATOR, MARKER))
 
 
 def replace_decorator(node, capture, filename):
     """
-    Replaces usage of ``@expensiveTest`` with ``@pytest.mark.expensive_test``
+    Replaces usage of ``@expensiveTest`` with ``@pytest.mark.expensive_test``.
     """
     return utils.rewrite_decorator(node, DECORATOR, MARKER)

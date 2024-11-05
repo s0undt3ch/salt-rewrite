@@ -1,22 +1,19 @@
 """
-    rewriter.imports.fix_tornado_imports
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Fix tornado imports
+Fix tornado imports.
 """
-# pylint: disable=no-member
-from bowler import Query
+
 from bowler import SYMBOL
 from bowler import TOKEN
-from fissix.fixer_util import find_indentation
+from bowler import Query
 from fissix.fixer_util import Name
+from fissix.fixer_util import find_indentation
 from fissix.pytree import Leaf
 from fissix.pytree import Node
 
 
 def rewrite(paths, interactive=False, silent=False):
     """
-    Rewrite the passed in paths
+    Rewrite the passed in paths.
     """
     (
         Query(paths)
@@ -33,7 +30,7 @@ def rewrite(paths, interactive=False, silent=False):
 
 def filter_tornado_imports(node, capture, filename):
     """
-    Filter tornado imports
+    Filter tornado imports.
     """
     for leaf in capture["node"].leaves():
         if leaf.value == "tornado":
@@ -42,7 +39,7 @@ def filter_tornado_imports(node, capture, filename):
 
 def _get_decorator(node):
     """
-    Don't modify classes or test methods that aren't decorated with ``@tornado``
+    Don't modify classes or test methods that aren't decorated with ``@tornado``.
     """
     if node.parent.type == SYMBOL.decorated:
         child = node.parent.children[0]
@@ -62,14 +59,14 @@ def _get_decorator(node):
 
 def filter_not_decorated(node, capture, filename):
     """
-    Filter undecorated nodes
+    Filter undecorated nodes.
     """
     return bool(_get_decorator(node))
 
 
 def get_decorator_name(decorator):
     """
-    Returns the name of the decorator
+    Returns the name of the decorator.
     """
     name = decorator.children[1]
     assert name.type in {TOKEN.NAME, SYMBOL.dotted_name}
@@ -78,7 +75,7 @@ def get_decorator_name(decorator):
 
 def replace_decorators(node, capture, filename):
     """
-    Replaces usage of ``@tornado.<etc>`` with ``@salt.ext.tornado.<etc>``
+    Replaces usage of ``@tornado.<etc>`` with ``@salt.ext.tornado.<etc>``.
     """
     indent = find_indentation(node)
 

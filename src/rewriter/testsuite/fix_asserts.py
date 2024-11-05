@@ -1,18 +1,15 @@
 """
-    rewriter.testsuite.fix_asserts
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This rewrites unittest `self.assert*` into plain assertions.
 
-    This rewrites unittest `self.assert*` into plain assertions
+The source for most of this code is:
 
-    The source for most of this code is:
-
-        https://github.com/craigds/decrapify/blob/master/pytestify.py
+https://github.com/craigds/decrapify/blob/master/pytestify.py
 """
-# pylint: disable=no-member,missing-function-docstring
+
 from functools import wraps
 
-from bowler import Query
 from bowler import TOKEN
+from bowler import Query
 from bowler.types import Leaf
 from bowler.types import Node
 from fissix.fixer_util import ArgList
@@ -23,6 +20,7 @@ from fissix.fixer_util import Dot
 from fissix.fixer_util import KeywordArg
 from fissix.fixer_util import touch_import
 from fissix.pygram import python_symbols as syms
+
 from rewriter.utils import filter_test_files
 from rewriter.utils import keyword
 
@@ -102,7 +100,7 @@ BOOLEAN_VALUES = ("True", "False")
 
 def rewrite(paths, interactive=False, silent=False):
     """
-    Rewrite the passed in paths
+    Rewrite the passed in paths.
     """
     # Don't waste time on non-test files
     paths = filter_test_files(paths)
@@ -201,8 +199,8 @@ def rewrite(paths, interactive=False, silent=False):
 
 
 # TODO : Add this to fissix.fixer_util
-def Assert(test, message=None, **kwargs):  # pylint: disable=invalid-name
-    """Build an assertion statement"""
+def Assert(test, message=None, **kwargs):
+    """Build an assertion statement."""
     if not isinstance(test, list):
         test = [test]
     test[0].prefix = " "
@@ -212,17 +210,16 @@ def Assert(test, message=None, **kwargs):  # pylint: disable=invalid-name
         message.insert(0, Comma())
         message[1].prefix = " "
 
-    node = Node(
+    return Node(
         syms.assert_stmt,
         [Leaf(TOKEN.NAME, "assert")] + test + (message or []),
         **kwargs,
     )
-    return node
 
 
 def conversion(func):
     """
-    Decorator. Handle some boilerplate
+    Decorator. Handle some boilerplate.
     """
 
     @wraps(func)
@@ -263,6 +260,8 @@ def conversion(func):
 @conversion
 def assertmethod_to_assert(node, capture, arguments):
     """
+    Replace assert method to plain assert calls.
+
     self.assertEqual(foo, bar, msg)
     --> assert foo == bar, msg
 
@@ -383,7 +382,7 @@ def assertalmostequal_to_assert(node, capture, arguments):
 
     if first is None or second is None:
         # Not sure what this is, leave it alone
-        return
+        return None
 
     places = get_kwarg_value(2, "places")
     msg = get_kwarg_value(3, "msg")
@@ -394,7 +393,7 @@ def assertalmostequal_to_assert(node, capture, arguments):
             abs_delta = float(delta.value)
         except ValueError:
             # this should be a number, give up.
-            return
+            return None
     else:
         if places is None:
             places = 7
@@ -403,8 +402,8 @@ def assertalmostequal_to_assert(node, capture, arguments):
                 places = int(places.value)
             except (ValueError, AttributeError):
                 # this should be an int, give up.
-                return
-        abs_delta = "1e-%d" % places  # pylint: disable=consider-using-f-string
+                return None
+        abs_delta = "1e-%d" % places
 
     arguments[1].prefix = ""
     if invert:
@@ -442,6 +441,8 @@ def assertalmostequal_to_assert(node, capture, arguments):
 @conversion
 def handle_assertraises(node, capture, arguments):
     """
+    Replace `self.assertRaises` with `putest.raises`.
+
     with self.assertRaises(x):
 
         --> with pytest.raises(x):
@@ -482,6 +483,8 @@ def handle_assertraises(node, capture, arguments):
 @conversion
 def handle_assertraises_regex(node, capture, arguments):
     """
+    Replace `self.assertRaisesRegex` with `putest.raises`.
+
     with self.assertRaisesRegex(x, "regex match"):
 
         --> with pytest.raises(x, match="regex match"):
@@ -563,6 +566,8 @@ def handle_assertraises_regex(node, capture, arguments):
 @conversion
 def handle_assert_regex(node, capture, arguments):
     """
+    Replace assert method to plain assert calls.
+
     self.assertRegex(text, pattern, msg)
     --> assert re.search(pattern, text), msg
 

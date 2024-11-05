@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring
 from rewriter.testsuite import fix_asserts
 from rewriter.testsuite import fix_destructive_test_decorator
 from rewriter.testsuite import fix_expensive_test_decorator

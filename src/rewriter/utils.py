@@ -1,9 +1,7 @@
 """
-    rewriter.utils
-    ~~~~~~~~~~~~~~
-
-    Utility code.
+Utility code.
 """
+
 import os
 
 from bowler import SYMBOL
@@ -19,7 +17,7 @@ from fissix.pytree import Leaf
 
 def get_indent(node):
     """
-    Returns the indent for the passed node
+    Returns the indent for the passed node.
     """
     indent = None
     while node:
@@ -36,17 +34,17 @@ def remove_import(node, name):
     """
     Removes the import.
     """
-
     # def is_import_stmt(node):
     #    return (
-    #        node.type == fixer_util.syms.simple_stmt  # pylint: disable=no-member
+    #        node.type == fixer_util.syms.simple_stmt
     #        and node.children
     #        and fixer_util.is_import(node.children[0])
     #    )
 
     root = fixer_util.find_root(node)
     if "." in name:
-        raise NotImplementedError("Dotted imports not yet supported")
+        error = "Dotted imports not yet supported"
+        raise NotImplementedError(error)
 
     import_node = fixer_util.find_binding(name, root)
     if import_node:
@@ -55,11 +53,11 @@ def remove_import(node, name):
 
 def get_from_imports(node):
     """
-    Return `from module import bar` imports
+    Return `from module import bar` imports.
     """
     from_imports = []
     for child in node.children:
-        if child.type != pygram.python_symbols.import_as_names:  # pylint: disable=no-member
+        if child.type != pygram.python_symbols.import_as_names:
             continue
         for leaf in child.children:
             if leaf.type == TOKEN.NAME:
@@ -71,7 +69,6 @@ def remove_from_import(node, package, name):
     """
     Removes the ``from X import Y`` from the module.
     """
-
     root = fixer_util.find_root(node)
 
     import_node = fixer_util.find_binding(name, root, package)
@@ -97,7 +94,7 @@ def remove_from_import(node, package, name):
 
 def is_multiline(node):
     """
-    Checks if node is a multiline string
+    Checks if node is a multiline string.
     """
     if isinstance(node, list):
         return any(is_multiline(n) for n in node)
@@ -110,7 +107,7 @@ def is_multiline(node):
 
 def parenthesize_if_necessary(node):
     """
-    Parenthesize node if necessary to avoid syntax errors
+    Parenthesize node if necessary to avoid syntax errors.
     """
     if is_multiline(node):
         # If not already parenthesized, parenthesize
@@ -125,7 +122,7 @@ def parenthesize_if_necessary(node):
 
 def keyword(name, **kwargs):
     """
-    A helper to produce keyword nodes
+    A helper to produce keyword nodes.
     """
     kwargs.setdefault("prefix", " ")
     return Leaf(TOKEN.NAME, name, **kwargs)
@@ -133,7 +130,7 @@ def keyword(name, **kwargs):
 
 def filter_test_files(paths):
     """
-    Filter paths which don't match a salt test module
+    Filter paths which don't match a salt test module.
     """
     if not isinstance(paths, (list, tuple)):
         paths = [paths]
@@ -147,7 +144,7 @@ def filter_test_files(paths):
 
 def get_decorator(node, decorator_name, marker):
     """
-    Don't modify classes or test methods that aren't decorated with ``DECORATOR``
+    Don't modify classes or test methods that aren't decorated with ``DECORATOR``.
     """
     if node.parent.type == SYMBOL.decorated:
         child = node.parent.children[0]
@@ -167,11 +164,9 @@ def get_decorator(node, decorator_name, marker):
 
 def rewrite_decorator(node, decorator_name, marker):
     """
-    Replaces usage of ``@<decorator_name>`` with ``@<marker>``
+    Replaces usage of ``@<decorator_name>`` with ``@<marker>``.
     """
     decorator = get_decorator(node, decorator_name, marker)
-
-    # pylint: disable=no-member
 
     for leaf in decorator.children:
         if leaf.type == TOKEN.AT:
@@ -215,8 +210,6 @@ def rewrite_decorator(node, decorator_name, marker):
                         break
                     if break_out_of_atom:
                         continue
-
-    # pylint: enable=no-member
 
     touch_import(None, "pytest", node)
     remove_from_import(node, "tests.support.helpers", decorator_name)
