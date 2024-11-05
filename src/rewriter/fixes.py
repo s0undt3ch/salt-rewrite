@@ -8,8 +8,6 @@ import operator
 from collections import OrderedDict
 
 import rewriter.imports
-import rewriter.salt
-import rewriter.salt_extensions
 import rewriter.testsuite
 
 
@@ -21,12 +19,7 @@ class RegistryClass:
     __slots__ = ("__fixes__",)
 
     def __init__(self):
-        __fixes__ = (
-            rewriter.imports.__fixes__
-            + rewriter.testsuite.__fixes__
-            + rewriter.salt.__fixes__
-            + rewriter.salt_extensions.__fixes__
-        )
+        __fixes__ = rewriter.imports.__fixes__ + rewriter.testsuite.__fixes__
         __sorted_fixes__ = (
             (module.__name__.split(".")[-1], module)
             for (priority, module) in sorted(__fixes__, key=operator.itemgetter(0))
