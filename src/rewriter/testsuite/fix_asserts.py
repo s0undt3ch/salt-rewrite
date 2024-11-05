@@ -1,6 +1,6 @@
 """
-    saltrewrite.testsuite.fix_asserts
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.testsuite.fix_asserts
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     This rewrites unittest `self.assert*` into plain assertions
 
@@ -23,8 +23,8 @@ from fissix.fixer_util import Dot
 from fissix.fixer_util import KeywordArg
 from fissix.fixer_util import touch_import
 from fissix.pygram import python_symbols as syms
-from saltrewrite.utils import filter_test_files
-from saltrewrite.utils import keyword
+from rewriter.utils import filter_test_files
+from rewriter.utils import keyword
 
 # NOTE: these don't take inversions into account.
 # Hence why assertNotEqual is a synonym of assertEqual

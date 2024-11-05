@@ -1,16 +1,16 @@
 """
-    saltrewrite.fixes
-    ~~~~~~~~~~~~~~~~~
+    rewriter.fixes
+    ~~~~~~~~~~~~~~
 
-    Entry point for all the salt rewrite fixes
+    Entry point for all the code rewrite fixes
 """
 import operator
 from collections import OrderedDict
 
-import saltrewrite.imports
-import saltrewrite.salt
-import saltrewrite.salt_extensions
-import saltrewrite.testsuite
+import rewriter.imports
+import rewriter.salt
+import rewriter.salt_extensions
+import rewriter.testsuite
 
 
 class RegistryClass:
@@ -22,10 +22,10 @@ class RegistryClass:
 
     def __init__(self):
         __fixes__ = (
-            saltrewrite.imports.__fixes__
-            + saltrewrite.testsuite.__fixes__
-            + saltrewrite.salt.__fixes__
-            + saltrewrite.salt_extensions.__fixes__
+            rewriter.imports.__fixes__
+            + rewriter.testsuite.__fixes__
+            + rewriter.salt.__fixes__
+            + rewriter.salt_extensions.__fixes__
         )
         __sorted_fixes__ = (
             (module.__name__.split(".")[-1], module)

@@ -1,8 +1,8 @@
 """
-    saltrewrite.utils
-    ~~~~~~~~~~~~~~~~~
+    rewriter.utils
+    ~~~~~~~~~~~~~~
 
-    @todo: add description
+    Utility code.
 """
 import os
 

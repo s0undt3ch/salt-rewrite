@@ -1,13 +1,13 @@
 """
-    saltrewrite.salt.fix_warn_until
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.salt.fix_warn_until
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Fix warn_until calls and replace version names with actual versions.
 """
 from bowler import Query
 from bowler import TOKEN
 from fissix.pytree import Leaf
-from saltrewrite.salt.utils import SaltStackVersion
+from rewriter.salt.utils import SaltStackVersion
 
 
 def rewrite(paths, interactive=False, silent=False):

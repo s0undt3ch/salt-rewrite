@@ -1,7 +1,7 @@
 ---
--   id: salt-rewrite
-    name: salt-rewrite
-    entry: salt-rewrite
+-   id: rewriter
+    name: rewriter
+    entry: rewriter
     language: python
     language_version: python3
     args: []

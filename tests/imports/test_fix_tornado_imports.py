@@ -1,7 +1,7 @@
 # pylint: disable=missing-module-docstring,missing-function-docstring
 import textwrap
 
-from saltrewrite.imports import fix_tornado_imports
+from rewriter.imports import fix_tornado_imports
 
 
 def test_module_level_package_import(tempfiles):

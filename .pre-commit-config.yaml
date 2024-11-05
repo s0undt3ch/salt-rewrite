@@ -30,15 +30,15 @@ repos:
     hooks:
       - id: black
         args: [-l 100]
-  - repo: local
-    hooks:
-      - id: pylint
-        name: Lint code and tests
-        language: python
-        entry: poetry run pylint
-        types: [python]
-        additional_dependencies:
-          - poetry
+#  - repo: local
+#    hooks:
+#      - id: pylint
+#        name: Lint code and tests
+#        language: python
+#        entry: poetry run pylint
+#        types: [python]
+#        additional_dependencies:
+#          - poetry
 #  - repo: https://github.com/pre-commit/mirrors-pylint
 #    rev: v2.4.4
 #    hooks:

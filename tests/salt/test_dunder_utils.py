@@ -4,7 +4,7 @@ import textwrap
 from unittest.mock import patch
 
 import pytest
-from saltrewrite.salt import fix_dunder_utils
+from rewriter.salt import fix_dunder_utils
 
 log = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ def salt_utils_package(tmp_path):
         """
     )
     modpath.write_text(code)
-    with patch("saltrewrite.salt.fix_dunder_utils._get_salt_code_root", return_value=tmp_path):
+    with patch("rewriter.salt.fix_dunder_utils._get_salt_code_root", return_value=tmp_path):
         yield package_path
 
 

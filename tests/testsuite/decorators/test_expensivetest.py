@@ -1,7 +1,7 @@
 # pylint: disable=missing-module-docstring,missing-function-docstring
 import textwrap
 
-from saltrewrite.testsuite import fix_expensive_test_decorator
+from rewriter.testsuite import fix_expensive_test_decorator
 
 
 def test_class_level(tempfiles):

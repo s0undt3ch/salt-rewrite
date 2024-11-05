@@ -2,7 +2,7 @@
 import textwrap
 
 import pytest
-from saltrewrite.salt import fix_docstrings
+from rewriter.salt import fix_docstrings
 
 
 def test_fix_codeblock(tempfiles):

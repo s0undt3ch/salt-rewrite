@@ -1,13 +1,13 @@
 """
-    saltrewrite.testsuite.fix_expensive_test_decorator
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.testsuite.fix_expensive_test_decorator
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Replaces any use of ``@expensiveTest`` with ``@pytest.mark.expensive_test``,
     and, in case ``pytest`` isn't yet imported, it additionall adds the missing
     import
 """
 from bowler import Query
-from saltrewrite import utils
+from rewriter import utils
 
 MARKER = "pytest.mark.expensive_test"
 DECORATOR = "expensiveTest"

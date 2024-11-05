@@ -1,7 +1,7 @@
 # pylint: disable=missing-module-docstring,missing-function-docstring,too-many-lines
 import textwrap
 
-from saltrewrite.testsuite import fix_asserts
+from rewriter.testsuite import fix_asserts
 
 
 def test_assert_equal(tempfiles):

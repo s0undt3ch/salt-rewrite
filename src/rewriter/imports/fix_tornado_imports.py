@@ -1,6 +1,6 @@
 """
-    saltrewrite.imports.fix_tornado_imports
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.imports.fix_tornado_imports
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Fix tornado imports
 """

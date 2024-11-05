@@ -1,7 +1,7 @@
 # pylint: disable=missing-module-docstring,missing-function-docstring,too-many-lines,consider-using-f-string
 import textwrap
 
-from saltrewrite.salt import fix_warn_until
+from rewriter.salt import fix_warn_until
 
 
 def test_warn_until_func(tempfiles):

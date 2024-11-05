@@ -1,16 +1,16 @@
 """
-    saltrewrite.testsuite.fix_skip_if_not_root_decorator
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.testsuite.fix_requires_salt_modules_decorator
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Replaces any use of ``@skip_if_not_root`` with ``@pytest.mark.skip_if_not_root``,
+    Replaces any use of ``@requires_salt_modules`` with ``@pytest.mark.requires_salt_modules``,
     and, in case ``pytest`` isn't yet imported, it additionall adds the missing
     import
 """
 from bowler import Query
-from saltrewrite import utils
+from rewriter import utils
 
-MARKER = "pytest.mark.skip_if_not_root"
-DECORATOR = "skip_if_not_root"
+MARKER = "pytest.mark.requires_salt_modules"
+DECORATOR = "requires_salt_modules"
 
 
 def rewrite(paths, interactive=False, silent=False):
@@ -39,6 +39,6 @@ def filter_not_decorated(node, capture, filename):
 
 def replace_decorator(node, capture, filename):
     """
-    Replaces usage of ``@skip_if_not_root`` with ``@pytest.mark.skip_if_not_root``
+    Replaces usage of ``@requires_salt_modules`` with ``@pytest.mark.requires_salt_modules``
     """
     return utils.rewrite_decorator(node, DECORATOR, MARKER)

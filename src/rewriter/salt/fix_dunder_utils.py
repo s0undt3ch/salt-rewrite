@@ -1,6 +1,6 @@
 """
-    saltrewrite.salt.fix_dunder_utils
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.salt.fix_dunder_utils
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Fix ``__utils__["*.*"](...)`` calls to import and call the real utils module function.
 """

@@ -1,6 +1,6 @@
 """
-    saltrewrite.salt.fix_docstrings
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.salt.fix_docstrings
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Fix salt docstrings.
 """
@@ -9,7 +9,7 @@ import re
 
 from bowler import Query
 from bowler import TOKEN
-from saltrewrite.salt.utils import SaltStackVersion
+from rewriter.salt.utils import SaltStackVersion
 
 
 def rewrite(paths, interactive=False, silent=False):

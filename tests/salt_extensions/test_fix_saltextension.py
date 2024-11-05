@@ -2,7 +2,7 @@
 import os
 import textwrap
 
-from saltrewrite.salt_extensions import fix_saltext
+from rewriter.salt_extensions import fix_saltext
 
 
 def test_module_level_package_import(tempfiles):

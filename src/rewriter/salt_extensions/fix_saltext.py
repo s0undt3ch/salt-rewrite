@@ -1,6 +1,6 @@
 """
-    saltrewrite.salt_extensions.fix_saltext
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.salt_extensions.fix_saltext
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Fix imports and module references
     when migrating Salt modules to extensions

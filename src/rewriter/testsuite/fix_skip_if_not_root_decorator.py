@@ -1,16 +1,16 @@
 """
-    saltrewrite.testsuite.fix_skip_if_binaries_missing_decorator
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.testsuite.fix_skip_if_not_root_decorator
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Replaces any use of ``@skip_if_binaries_missing`` with ``@pytest.mark.skip_if_binaries_missing``,
+    Replaces any use of ``@skip_if_not_root`` with ``@pytest.mark.skip_if_not_root``,
     and, in case ``pytest`` isn't yet imported, it additionall adds the missing
     import
 """
 from bowler import Query
-from saltrewrite import utils
+from rewriter import utils
 
-MARKER = "pytest.mark.skip_if_binaries_missing"
-DECORATOR = "skip_if_binaries_missing"
+MARKER = "pytest.mark.skip_if_not_root"
+DECORATOR = "skip_if_not_root"
 
 
 def rewrite(paths, interactive=False, silent=False):
@@ -39,6 +39,6 @@ def filter_not_decorated(node, capture, filename):
 
 def replace_decorator(node, capture, filename):
     """
-    Replaces usage of ``@skip_if_binaries_missing`` with ``@pytest.mark.skip_if_binaries_missing``
+    Replaces usage of ``@skip_if_not_root`` with ``@pytest.mark.skip_if_not_root``
     """
     return utils.rewrite_decorator(node, DECORATOR, MARKER)

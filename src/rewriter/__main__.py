@@ -1,11 +1,11 @@
 """
-    saltrewrite.cli
-    ~~~~~~~~~~~~~~~
+    rewriter.cli
+    ~~~~~~~~~~~~
 
-    ``salt-rewrite``'s CLI interface
+    ``rewriter``'s CLI interface
 """
 import click
-from saltrewrite.fixes import Registry
+from rewriter.fixes import Registry
 
 try:
     from importlib.metadata import version
@@ -39,7 +39,7 @@ except ImportError:
     type=click.Choice(Registry.fix_names(), case_sensitive=False),
     multiple=True,
 )
-@click.version_option(version=version("salt-rewrite"))
+@click.version_option(version=version("rewriter"))
 def rewrite(paths, interactive, silent, list_fixes, fix, exclude_fix):
     """
     Main CLI entry-point

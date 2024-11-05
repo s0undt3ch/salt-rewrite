@@ -1,16 +1,16 @@
 """
-    saltrewrite.testsuite.fix_slow_test_decorator
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    rewriter.testsuite.fix_requires_salt_states_decorator
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Replaces any use of ``@slowTest`` with ``@pytest.mark.slow_test``,
+    Replaces any use of ``@requires_salt_states`` with ``@pytest.mark.requires_salt_states``,
     and, in case ``pytest`` isn't yet imported, it additionall adds the missing
     import
 """
 from bowler import Query
-from saltrewrite import utils
+from rewriter import utils
 
-MARKER = "pytest.mark.slow_test"
-DECORATOR = "slowTest"
+MARKER = "pytest.mark.requires_salt_states"
+DECORATOR = "requires_salt_states"
 
 
 def rewrite(paths, interactive=False, silent=False):
@@ -39,6 +39,6 @@ def filter_not_decorated(node, capture, filename):
 
 def replace_decorator(node, capture, filename):
     """
-    Replaces usage of ``@slowTest`` with ``@pytest.mark.slow_test``
+    Replaces usage of ``@requires_salt_states`` with ``@pytest.mark.requires_salt_states``
     """
     return utils.rewrite_decorator(node, DECORATOR, MARKER)
