@@ -95,6 +95,9 @@ ignore = [
 "src/rewriter/utils.py" = [
   "S101",   # Use of `assert` detected
 ]
+"src/rewriter/imports/__init__.py" = [
+  "F401",   # XYZ imported but unused; consider removing, adding to `__all__`, or using a redundant alias"
+]
 "src/rewriter/imports/fix_tornado_imports.py" = [
   "S101",   # Use of `assert` detected
 ]
@@ -112,6 +115,9 @@ ignore = [
   "D104",     # Missing docstring in public package
   "FBT001",   # Boolean positional arg in function definition
   "FBT002",   # Boolean default value in function definition
+]
+"tests/conftest.py" = [
+  "SIM115",   # Use a context manager for opening files
 ]
 "tests/**/*.py" = [
   "ANN",      # Ignore missing type annotations in tests

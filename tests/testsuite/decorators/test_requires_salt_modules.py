@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring,missing-function-docstring
 import textwrap
 
 from rewriter.testsuite import fix_requires_salt_modules_decorator

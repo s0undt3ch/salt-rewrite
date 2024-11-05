@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring
 from rewriter.imports import fix_tornado_imports
 
 __all__ = [modname for modname in list(globals()) if modname.startswith("fix_")]

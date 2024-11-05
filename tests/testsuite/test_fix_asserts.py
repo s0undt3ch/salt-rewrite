@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring,missing-function-docstring,too-many-lines
 import textwrap
 
 from rewriter.testsuite import fix_asserts

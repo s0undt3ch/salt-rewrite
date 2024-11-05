@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring,missing-function-docstring
 import textwrap
 
 from rewriter.testsuite import fix_slow_test_decorator
