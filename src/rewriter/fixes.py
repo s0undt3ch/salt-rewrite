@@ -2,11 +2,9 @@
 Entry point for all the code rewrite fixes.
 """
 
+import importlib.metadata
 import operator
 from collections import OrderedDict
-
-import rewriter.imports
-import rewriter.testsuite
 
 
 class RegistryClass:
@@ -17,10 +15,14 @@ class RegistryClass:
     __slots__ = ("__fixes__",)
 
     def __init__(self):
-        __fixes__ = rewriter.imports.__fixes__ + rewriter.testsuite.__fixes__
+        fixes = []
+        for entry_point in importlib.metadata.entry_points(group="fixers"):
+            module = entry_point.load()
+            fixes.append(
+                (getattr(module, "FIX_PRIORITY", 0), module.__name__.split(".")[-1], module)
+            )
         __sorted_fixes__ = (
-            (module.__name__.split(".")[-1], module)
-            for (priority, module) in sorted(__fixes__, key=operator.itemgetter(0))
+            (name, module) for (_, name, module) in sorted(fixes, key=operator.itemgetter(0))
         )
         self.__fixes__ = OrderedDict(__sorted_fixes__)
 
