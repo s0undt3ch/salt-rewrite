@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python 3.12
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.12
       - name: Get full python version
@@ -18,7 +18,7 @@ jobs:
           PY=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info[:3]))")
           echo "version=$PY" >> "$GITHUB_OUTPUT"
       - name: Set up cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-lint-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
@@ -46,9 +46,9 @@ jobs:
           - "3.13"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Get full python version
@@ -57,7 +57,7 @@ jobs:
         PY=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info[:3]))")
         echo "version=$PY" >> "$GITHUB_OUTPUT"
     - name: Set up cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: .venv
         key: venv-${{ runner.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
@@ -139,9 +139,9 @@ jobs:
           - "3.13"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Get full python version
@@ -150,7 +150,7 @@ jobs:
         PY=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info[:3]))")
         echo "version=$PY" >> "$GITHUB_OUTPUT"
     - name: Set up cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: .venv
         key: venv-${{ runner.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
@@ -234,9 +234,9 @@ jobs:
           - "3.13"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Get full python version
@@ -246,7 +246,7 @@ jobs:
         PY=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info[:3]))")
         echo "version=$PY" >> "$GITHUB_OUTPUT"
     - name: Set up cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: .venv
         key: venv-${{ runner.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
